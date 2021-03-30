@@ -13,6 +13,7 @@ import {
 import Container from 'react-bootstrap/Container';
 import Home from './components/Home';
 import NavBar from './components/Navbar';
+import StationPage from './components/StationPage';
 
 function App() {
   const [stations, setStations] = useState([]);
@@ -24,7 +25,7 @@ function App() {
         <Container>
           <Switch>
             <Route path="/:stationId">
-              ABCD
+              <StationPage stations={stations}/>
             </Route>
             <Route path="/">
               <Home stations={stations} setStations={setStations}/>

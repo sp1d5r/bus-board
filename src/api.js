@@ -8,3 +8,7 @@ export function getStationsFromCoord(coord){
       .then((resp) => resp.json())
       .then((json) => json.stopPoints);
   }
+
+export function getArrivalsFromStation(stationId) {
+    return fetch(`https://api.tfl.gov.uk/StopPoint/${stationId}/Arrivals`).then((resp) => resp.json());
+  }
