@@ -1,26 +1,32 @@
 /*
     HOME PAGE
 */
-import { useRef, useState } from 'react';
+import React, { useRef, useState, SetStateAction, Dispatch, FormEvent } from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
-import {getCoordFromPostcode, getStationsFromCoord} from '../api.js'
-import Stations from './Stations.js';
+import {getCoordFromPostcode, getStationsFromCoord} from '../api'
+import type {Station} from '../api';
+import Stations from './Stations';
 
-/* Style Sheets */
-const backgroundStyleSheet = {height:"500px", width:"100%"}
+interface Props {
+    stations: Station[],
+    setStations: Dispatch<SetStateAction<Station[]>>
+}
 
-export default function Home(props){
-    const inputRef = useRef(null);
-    const [error, setError] = useState(null);
+const Home = (props: Props) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    const [error, setError] = useState<string | null>(null);
 
     /* Postcode Form handler
      - Calls the api.js file to get the station information and passes 
        the station information to top level hook in App.js.
      */
-    async function onSubmit(e){
-        e.preventDefault();
+    async function onSubmit(event: FormEvent<HTMLFormElement>){
+        event.preventDefault();
+
+        if(!inputRef.current){return}
+
         const postcode = inputRef.current.value;
         
         try {
@@ -48,7 +54,7 @@ export default function Home(props){
     }
 
     return (
-        <div className="background" style={backgroundStyleSheet}>
+        <div className="background">
             <h3 className="mt-3">
                 Enter your postcode:
             </h3>
@@ -73,3 +79,5 @@ export default function Home(props){
         </div>
     );
 }
+
+export default Home;

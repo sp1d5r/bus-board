@@ -1,10 +1,11 @@
 /*
     NAVIGATION BAR
 */
+import React, { FunctionComponent } from 'react';
 import Navbar from 'react-bootstrap/Navbar'
 import { useHistory } from 'react-router';
 
-export default function NavBar() {
+const NavBar:FunctionComponent = () => {
     const history = useHistory();
     return (
         <Navbar bg="light">
@@ -12,3 +13,5 @@ export default function NavBar() {
         </Navbar>
     );
 }
+
+export default NavBar;

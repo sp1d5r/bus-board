@@ -3,20 +3,23 @@
 */
 
 import './App.css';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+
 import Container from 'react-bootstrap/Container';
+
 import Home from './components/Home';
 import NavBar from './components/Navbar';
 import StationPage from './components/StationPage';
 
-function App() {
-  const [stations, setStations] = useState([]);
+import type {Station} from './api';
+
+const App = () => {
+  const [stations, setStations] = useState<Station[]>([]);
 
   return (
     <Router>
